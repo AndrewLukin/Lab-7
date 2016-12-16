@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
+
+using namespace std;
+struct Metro
+{
+	char MetSt[60];
+	char NameMetLine[32];
+	int NumMetLine[3];
+};
+
+int main(int argc, char* argv[])
+{
+	Metro*pG;
+	int n;
+	printf("Number of Metro stations: ");
+	scanf_s("%d", &n);
+	pG = (Metro*)malloc(n * sizeof(Metro));
+	for (unsigned int i = 0; i<n; ++i)
+	{
+		printf_s("\nName of Metro line: ");
+		cin >> pG[i].NameMetLine;
+		printf_s("\nNumber of Metro line: ");
+		scanf_s("%d", &pG[i].NumMetLine);
+		printf_s("Name of Metro station: ");
+		cin >> pG[i].MetSt;
+	}
+	FILE *pF = fopen("Metro.dat", "wb");
+	fwrite(&n, sizeof(int), 1, pF);
+	fwrite(pG, sizeof(Metro), n, pF);
+	fclose(pF);
+	system("pause");
+	return 0;
+}
